@@ -125,7 +125,7 @@ app.post('/signin', (req, res) => {
   if (email === 'hello@gmail.ocm' && password === 'test') {
     return res.json({ status: 1, message: 'login successful', token: 'jwt-token' });
   }
-  if (Math.random() > 0.5) {
+  if (Math.random() < 0.2) {
     return res.json({ status: -1, message: 'Server error' });
   }
   res.json({ status: 0, message: 'wrong credintals' });
@@ -170,11 +170,45 @@ app.post('/profile', (req, res) => {
             userType: "guide",
             paymentEmail : "sarah@example.com",
             createdAt: "2024-01-01T12:00:00Z",
-            updatedAt: "2025-04-18T10:30:00Z"
+            updatedAt: "2025-04-18T10:30:00Z",
+            totalTrips: 51,
+            totalFails: 3,
+            rating: 0.9411764705882353
+      
           }
        });
     
   });
+
+
+
+app.post('/cancelTrip' , (req,res) =>{
+  const tripId = req.tripId
+  if (!tripId) {
+    return res.json({status: -1, message: "Failed to cancel trip" });
+  }
+  return res.json({
+    status : 1,
+    meassage : "trip cancelled successfully"
+  })
+
+
+})
+
+
+
+
+
+app.post('/contact' , (req,res) =>{
+  if (Math.random() < 0.2) {
+    return res.json({status: -1, message: "couldn't send inquery" });
+  }
+  return res.json({ status: 1, message: "your inquery has been sent successfully" })
+
+
+})
+
+
 
 
 
